@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Existing Dockerfile",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../Dockerfile"
+	},
+	"workspaceMount": "/app",
+  	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+        		"ms-python.flake8",
+				"ms-python.black-formatter"
+			],
+			"settings": {
+				"python.formatting.provider": "black",
+				"[python]": {
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.organizeImports": true
+					}
+				}
+			}
+		}
+  	}
+}
