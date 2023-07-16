@@ -1,22 +1,17 @@
-FROM python:3.10.6-alpine3.16
+FROM python:3.11.3-alpine
 LABEL maintainer = "anibal99"
 
 ENV PYTHONUNBUFFERED 1
 EXPOSE 8000
 
-COPY ./requirements.txt /tmp/requirements.txt
-COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./requirements.txt /requirements.txt
+WORKDIR /app
+# COPY ./app /app
 
 RUN pip install --upgrade pip && \
-    pip install -r /tmp/requirements.txt && \
-    if [ $DEV = "true" ]; \
-        then pip install -r /tmp/requirements.dev.txt ; \
-    fi &&\
-    rm -rf /tmp
+    pip install -r /requirements.txt && \
+    rm -rf /requirements.txt
 
-RUN mkdir /app
-WORKDIR /app
-
-ADD ./app /app
-
-ARG DEV=false
+# user
+RUN adduser -D user
+USER user
